@@ -1,0 +1,40 @@
+# Directorios de entornos virtuales
+# NO subas el entorno virtual 'venv'
+venv/
+env/
+
+# Archivos de Python
+# Bytecode generado por Python
+__pycache__/
+*.pyc
+*~$
+*.bak
+*.swp
+
+# Archivos de Django y Base de Datos
+# La base de datos local de SQLite (¡IMPORTANTE!)
+db.sqlite3
+
+# Archivos de configuración sensibles/variables de entorno
+# Usa variables de entorno o un archivo .env que NO se sube.
+# Si usas un archivo .env para la SECRET_KEY
+.env
+.secrets
+*.key
+*.pem
+*.yml
+*.yaml
+
+# Archivos de Media
+# Archivos subidos por los usuarios (imágenes, documentos)
+# El almacenamiento de esto debe ser manejado por el servidor o AWS/Google Cloud
+/media/
+
+# Archivos estáticos generados durante la compilación
+/static/
+
+# Archivos de IDEs comunes (ej. Visual Studio Code)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
