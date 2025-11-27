@@ -60,6 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'config.context_processors.global_settings',
             ],
         },
     },
@@ -122,10 +123,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # --- GLOBAL CLUB CUSTOMIZATION SETTINGS ---
 # Parámetros para la personalización de la plantilla del club.
-CLUB_NAME = "Deportivo Brutalidad"
+CLUB_NAME = "Club Olimpo"
 CLUB_SLOGAN = "Cuestionamos tu juego."
-CLUB_PRIMARY_COLOR = "#8B0000"  # Color principal del club.
-CLUB_SECONDARY_COLOR = "#FFD700" # Color secundario.
+CLUB_PRIMARY_COLOR = "#01197e"  # Color principal del club.
+CLUB_SECONDARY_COLOR = "#FFEE8FEF" # Color secundario.
 
 # Directorio para los archivos subidos (ej: fotos de noticias, escudos).
 MEDIA_URL = '/media/'

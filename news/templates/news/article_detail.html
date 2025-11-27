@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'news:list' %}">← Volver a Noticias</a>
+    
+    <h1>{{ article.title }}</h1>
+    <p><strong>Categoría:</strong> {{ article.category.name }}</p>
+    <p><strong>Publicado:</strong> {{ article.published_date }}</p>
+    
+    {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.title }}" style="max-width: 100%; height: auto;">
+    {% endif %}
+
+    <div class="article-body" style="margin-top: 20px;">
+        {{ article.body|linebreaks }}
+    </div>
+    
+{% endblock %}

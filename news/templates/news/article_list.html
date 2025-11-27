@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+
+{% block title %}Últimas Noticias{% endblock %}
+
+{% block content %}
+    <h2>Últimas Noticias del {{ settings.CLUB_NAME }}</h2>
+    
+    {% for article in articles %}
+        <article style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px;">
+            <h3><a href="{% url 'news:detail' pk=article.pk %}">{{ article.title }}</a></h3>
+            <p><strong>Categoría:</strong> {{ article.category.name }}</p>
+            <p><strong>Publicado:</strong> {{ article.published_date }}</p>
+            <p>{{ article.summary }}</p>
+            <a href="{% url 'news:detail' pk=article.pk %}">Leer más...</a>
+        </article>
+    {% empty %}
+        <p>No hay noticias publicadas en este momento.</p>
+    {% endfor %}
+
+    {% endblock %}

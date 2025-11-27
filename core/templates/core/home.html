@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h2>Bienvenidos al {{ settings.CLUB_NAME }}</h2>
+    <p>Esta es la página principal de tu sitio web, construida con la estructura base de colores y estilos globales.</p>
+    <p>Puedes empezar a <a href="{% url 'news:list' %}">ver las noticias aquí</a>.</p>
+
+    {% endblock %}
