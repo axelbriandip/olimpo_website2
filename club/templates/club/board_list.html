@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+
+{% block title %}Autoridades{% endblock %}
+
+{% block content %}
+    <h1>Planteles y Comisión Directiva del {{ settings.CLUB_NAME }}</h1>
+    
+    {# Bucle principal: Itera sobre la lista de categorías (club_data) #}
+    {% for group in club_data %}
+        <section class="club-category" style="margin-top: 40px; border-top: 2px solid {{ settings.CLUB_PRIMARY_COLOR }}; padding-top: 15px;">
+            <h2 style="color: {{ settings.CLUB_PRIMARY_COLOR }};">{{ group.category.name }}</h2>
+            
+            <div class="people-grid" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                
+                {# Bucle anidado: Itera sobre las personas dentro de cada categoría #}
+                {% for person in group.people %}
+                    <div class="person-card" style="border: 1px solid #ddd; padding: 10px; width: 200px; text-align: center;">
+                        
+                        {% if person.photo %}
+                            <img src="{{ person.photo.url }}" alt="{{ person.full_name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+                        {% else %}
+                            <div style="width: 100px; height: 100px; background-color: #ccc; border-radius: 50%; margin: auto;"></div>
+                        {% endif %}
+                        
+                        <h3>{{ person.full_name }}</h3>
+
+                        {# ---------------------------------------------------- #}
+                        {# Lógica para mostrar el ROL ESPECÍFICO en ESTA categoría #}
+                        {# ---------------------------------------------------- #}
+
+                        {% comment %}
+                            Buscamos en la colección de roles (clubrole_set) de la persona, 
+                            el que coincide con la categoría actual (group.category).
+                            Usamos WITH y un bucle para manejar la complejidad.
+                        {% endcomment %}
+
+                        {% with rol_encontrado=0 %}
+                            
+                            {% for role_obj in person.clubrole_set.all %}
+                                
+                                {# Comprobamos si el ID de la Categoría del rol coincide con el ID de la Categoría del grupo #}
+                                {% if role_obj.category.id == group.category.id %}
+                                    
+                                    {# Muestra la POSICIÓN (Rol) #}
+                                    <p><strong>{{ role_obj.position.name }}</strong></p>
+                                    
+                                    {% if person.jersey_number %}
+                                        <span style="font-size: 1.5em; font-weight: bold; color: darkgreen;">#{{ person.jersey_number }}</span>
+                                    {% endif %}
+                                    
+                                    {# Marcar que se encontró un rol. Esto evita que mostremos "Sin Rol Específico" #}
+                                    {% with rol_encontrado=1 %}
+                                    {% endwith %}
+
+                                {% endif %}
+                                
+                            {% endfor %}
+
+                        {% endwith %}
+
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        
+    {% empty %}
+        <p>Aún no se ha cargado ninguna información de planteles o autoridades.</p>
+    {% endfor %}
+
+{% endblock %}

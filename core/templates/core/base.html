@@ -34,7 +34,23 @@
         <nav>
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'news:list' %}">Noticias</a>
-            <a href="{% url 'club:players_list' %}">Planteles (pendiente)</a>
+            
+            {# Implementación del Dropdown "Club" #}
+            <div class="dropdown">
+                <a href="#">Club ▼</a>
+                <div class="dropdown-content" style="display: none; position: absolute; background-color: white; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1;">
+                    <a href="{% url 'club:players_list' %}" style="color: black;">Planteles Deportivos</a>
+                    <a href="{% url 'club:board_list' %}" style="color: black;">Comisión Directiva</a>
+                    <a href="{% url 'history' %}" style="color: black;">Nuestra Historia</a>
+                </div>
+            </div>
+            
+            <style>
+                .dropdown { display: inline-block; position: relative; }
+                .dropdown-content a { padding: 12px 16px; display: block; text-align: left; }
+                .dropdown-content a:hover { background-color: #f1f1f1; }
+                .dropdown:hover .dropdown-content { display: block !important; }
+            </style>
         </nav>
     </header>
     
